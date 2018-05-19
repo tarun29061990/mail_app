@@ -1,0 +1,13 @@
+#-*- coding:utf-8 -*-
+SQL_UP = u"""
+insert into placeholders (`name`,`display_name`)
+Values
+('inbox','Inbox'),
+('sent_mail', 'Sent Mail'),
+('drafts', 'Drafts'),
+('trash', 'Trash');
+"""
+
+SQL_DOWN = u"""
+delete * from placeholders;
+"""

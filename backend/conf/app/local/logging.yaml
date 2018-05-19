@@ -1,0 +1,35 @@
+version: 1
+
+filters:
+    request_id_filter:
+        '()': 'common.request_filter.RequestIdFilter'
+
+formatters:
+    simple:
+#        format: "%(asctime)s %(levelname)s %(pathname)s:%(lineno)d - %(message)s"
+        format: "%(asctime)s %(levelname)s %(request_id)s %(filename)s:%(lineno)d - %(message)s"
+
+handlers:
+#    root_file:
+#        class: logging.FileHandler
+#        formatter: simple
+#        filters: ['request_id_filter']
+#        level: INFO
+#        filename: /tmp/root.log
+
+    console:
+        class: logging.StreamHandler
+        formatter: simple
+        filters: ['request_id_filter']
+        level: INFO
+        stream: ext://sys.stdout
+
+loggers:
+    application:
+        level: INFO
+        handlers: [root_file]
+        propagate: yes
+
+root:
+    level: INFO
+    handlers: [root_file]

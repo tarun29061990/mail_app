@@ -1,0 +1,53 @@
+#-*- coding:utf-8 -*-
+SQL_UP = u"""
+create table placeholders(
+  `id`                     INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name`                   VARCHAR(255) NOT NULL,
+  `display_name`           VARCHAR(255) NOT NULL,
+  `created_at`             DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at`             DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+);
+
+create table users(
+  `id`                          INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name`                        VARCHAR(50) NOT NULL,
+  `email`                       VARCHAR(255) NOT NULL,
+  `password`                    VARCHAR(255) NOT NULL,
+  `created_at`                  DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at`                  DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+);
+
+create table messages(
+  `id`                          INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `subject`                     VARCHAR(255) NOT NULL,
+  `body`                        VARCHAR(255) NOT NULL,
+  `date`                        DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at`                  DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at`                  DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+);
+
+create table users_messages_mapping(
+  `id`                            INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `user_id`                       INT(10) UNSIGNED NOT NULL,
+  `placeholder_id`                INT(10) UNSIGNED NOT NULL,
+  `message_id`                    INT(10) UNSIGNED NOT NULL,
+  `is_read`                       INT(1)  NOT NULL DEFAULT 0,
+  `created_at`                  DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at`                  DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  CONSTRAINT  fk_user_id FOREIGN KEY (`user_id`) REFERENCES users(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT  fk_placeholder_id FOREIGN KEY (`placeholder_id`) REFERENCES placeholders(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT  fk_message_id FOREIGN KEY (`message_id`) REFERENCES messages(`id`) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+"""
+
+SQL_DOWN = u"""
+DROP table users_messages_mapping;
+DROP table messages;
+DROP table users;
+DROP table placeholders;
+"""

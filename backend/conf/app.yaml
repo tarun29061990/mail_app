@@ -1,0 +1,10 @@
+database:
+  host: localhost
+  name: promolta
+  user: root
+  password: ""
+  charset: utf8
+  init_pool_size: 20
+  max_pool_size: 25
+  pool_recycle_delay: 600
+  sql_logging: True

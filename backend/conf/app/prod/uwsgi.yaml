@@ -1,0 +1,18 @@
+uwsgi:
+  uid: _uwsgi
+  socket: %v/tmp/uwsgi.sock
+  stats: %v/tmp/uwsgistats.sock
+  chmod-socket: 777
+  pidfile: %v/tmp/uwsgi.pid
+  daemonize: %v/log/uwsgi.log
+  req-logger: file:%v/log/access.log
+  logformat: %(addr) - %(user) [%(ltime)] "%(method) %(uri) %(proto)" %(status) %(size) "%(referer)" "%(uagent)"
+  master: True
+  processes: 10 # %k Number of CPU cores
+  enable-threads: False # Enable this if application uses theads
+  home: %v
+  chdir: %v/src
+  module: main
+  callable: application
+  need-app: True # Server will not start if app is not loaded
+  buffer-size: 32768

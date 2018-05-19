@@ -1,0 +1,12 @@
+Flask==0.10.1
+Flask-Cors==3.0.3
+Flask-Login==0.4.0
+Flask-MySQLdb==0.2.0
+Flask-RESTful==0.3.6
+git+https://github.com/tarun29061990/pyboot@v1
+pytz==2018.3
+simple-db-migrate==3.0.0
+SQLAlchemy==1.0.13
+PyYAML==3.11
+Flask-Login==0.4.0
+bcrypt==3.1.3

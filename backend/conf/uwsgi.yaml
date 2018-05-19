@@ -1,0 +1,14 @@
+uwsgi:
+  uid: _uwsgi
+  socket: %v/tmp/uwsgi.sock
+  pidfile: %v/tmp/uwsgi.pid
+  daemonize: %v/log/uwsgi.log
+  req-logger: file:%v/log/access.log
+  logformat: %(addr) - %(user) [%(ltime)] "%(method) %(uri) %(proto)" %(status) %(size) "%(referer)" "%(uagent)"
+  master: True
+  processes: 4 # %k Number of CPU cores
+  enable-threads: True
+  home: %v
+  chdir: %v/src
+  module: main
+  callable: application

@@ -1,0 +1,28 @@
+version: 1
+
+formatters:
+    simple:
+        format: "%(asctime)s %(levelname)s %(pathname)s:%(lineno)d - %(message)s"
+
+handlers:
+#    root_file:
+#        class: logging.FileHandler
+#        formatter: simple
+#        level: INFO
+#        filename: /usr/share/launchpad-backend/log/root.log
+
+    console:
+        class: logging.StreamHandler
+        formatter: simple
+        level: INFO
+        stream: ext://sys.stdout
+
+loggers:
+    application:
+        level: DEBUG
+        handlers: [console]
+        propagate: yes
+
+root:
+    level: DEBUG
+    handlers: [console]
