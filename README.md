@@ -28,3 +28,6 @@ BODY {'name':'','email':'','password':''}
     - For Example If you send a mail then it will appear in your sent mail box  
 - Reply, Forward a message
 - Color coding of a message when read
+
+
+### Find the DB dump in backend/db folder
