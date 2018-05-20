@@ -1,92 +1,10 @@
 database:
   host: localhost
-  name: grexter
+  name: promolta
   user: root
-  password: grexter@123
+  password: "grexter@123"
   charset: utf8
   init_pool_size: 20
   max_pool_size: 25
   pool_recycle_delay: 600
   sql_logging: True
-
-amazon_aws:
-  key_id: AKIAJTHWMGLYEKI2SSVA
-  key_secret: 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
-  region: ap-southeast-1
-  s3_url: https://grexter-images-local.s3.amazonaws.com/
-  s3_bucket_images: grexter-images
-  s3_bucket_tenants: grexter-tenants
-  s3_bucket_users: grexter-users
-  sqs_queue_emails: grexter-emails
-  email_enabled: True
-
-instamojo_credential:
- URL: "https://www.instamojo.com/api/1.1"
- X_API_KEY: "f9fa03ed491ef522dc4196e478ad0efd"
- X_AUTH_TOKEN: "5a7dfe9b92d97b9d3f94b5965e0c1b13"
- WEBHOOK_URL: "http://backend.grexter.in"
-
-instamojo_cc_dc_credential:
- URL: "https://www.instamojo.com/api/1.1"
- X_API_KEY: "943dfbc617dc15de53ad559de6835210"
- X_AUTH_TOKEN: "386c63faea4134c94ba31d2ccee1abc7"
- WEBHOOK_URL: "http://backend.grexter.in"
-
-instamojo_deposit_credential:
-  URL: "https://www.instamojo.com/api/1.1"
-  X_API_KEY: "9c6bc152cc7f55761154e0e6e2446422"
-  X_AUTH_TOKEN: "a16b2f2ef395e5f247b550118f583cf3"
-  WEBHOOK_URL: "http://backend.grexter.in"
-
-zendesk:
-  enabled: True
-  api_baseurl: https://grexter.zendesk.com/api
-  userid: prabal.pegu@grexter.in
-  password: ?Grexter123
-  api_token: 4iQ64lKItaTHAavv76rAgunDCKKNHqQJYhAMCrWQ
-  custom_field_ids:
-      issue_type: 114096266633
-      building_type: 114097793153
-      notice_period_start_date: 114096702534
-
-
-api_timeout: 60
-
-internal_email_sender: support@grexter.in
-rental_email_sender: rentals@grexter.in
-to_email_addresses_contact_us: ['pratul.gupta@grexter.in','brajesh.kumar@grexter.in', 'alok.singh@grexter.in','anand.francis@grexter.in','sales@grexter.in','prabal.pegu@grexter.in', 'anmol.agrawal@grexter.in']
-to_email_addresses_notice_period: ['support@grexter.in']
-to_email_addresses_finance: ['finance@grexter.in']
-to_email_addresses_notice_period_reminder: ['pratul.gupta@grexter.in','nikhil@grexter.in', 'support@grexter.in', 'khaleel.ahmed@grexter.in']
-
-invoice_path: "/usr/share/invoices"
-pdf_environment: "PRODUCTION"
-oauth_credentials:
- facebook:
-    app_id: 131929437493983
-    app_secret: 8fa7ecd7a386c16e315c5e760c86b2ba
-    callback: 'https://grexter.in/fb-callback'
-
-cron_user: 'tarunchaudhary'
-cron_enabled: True
-
-sms_gupshup:
-  url: "https://enterprise.smsgupshup.com/GatewayAPI/rest"
-  userid: '2000177273'
-  password: 'V6wA32YeQ'
-  auth_scheme: 'PLAIN'
-  v: '1.1'
-  format: 'text'
-  schedule_visit: "Hi {name}\n
-                   Greetings from Grexter!\n
-                   This is a confirmation that we've received your message. Our team will get in touch with you shortly."
-  schedule_visited_response: "Hi {name}\n
-                              Hope you had a lovely experience at our building {building_name}. We would like to see you soon."
-  rent_message_template: "Hi {name}\n
-                          We hope all is well with you. \n
-                          We just wanted to remind you that your rent payment is due for this month. \n
-                          Please pay your rent by clicking on this {link}"
-  rent_reminder_message_template: "Hi {name}\n
-                                   We hope all is well with you.\n
-                                   We just wanted to remind you that your rent payment is due for this month.\n
-                                   Please pay your rent by clicking on this {link}"
