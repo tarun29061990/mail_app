@@ -9,14 +9,11 @@ import {LogInService} from "./login.service";
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.css']
 })
-export class LogInComponent implements OnInit{
+export class LogInComponent{
 	public email:any;
 	public password:any;
 
 	constructor(private api: LogInService, private router: Router){}
-	ngOnInit(){
-
-	}
 
 	login(){
 		const that = this;

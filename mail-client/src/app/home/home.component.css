@@ -11,6 +11,10 @@
 	cursor: pointer;
 }
 
+.dark{
+  color:red; 
+}
+
 .container-fluid .mail-box{
 	margin:1em 0 0 10em;
 }

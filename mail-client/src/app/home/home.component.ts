@@ -68,6 +68,9 @@ export class HomeComponent implements OnInit{
 
 	getPlaceholderMails(placeholderName){
 		const that = this;
+
+		that.placeholderName = placeholderName;
+
 		that.showLoader = true;
 		that.api.getPlaceholderMails(that.senderId, placeholderName).subscribe(data=>{
 			that.showLoader = false;
@@ -97,7 +100,7 @@ export class HomeComponent implements OnInit{
 
 		that.showLoader = true;
 		that.api.trashIt(mail.id).subscribe(data=>{
-			that.mails.splice(that.mails.indexOf(mail));
+			
 			that.showLoader = false;
 			that.getPlaceholderMails('inbox');
 		}, err=>{});

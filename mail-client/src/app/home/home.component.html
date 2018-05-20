@@ -1,4 +1,4 @@
-<div class="container-fluid">
+\<div class="container-fluid">
 	<div class='row'>
 		<div class='header'></div>
 	</div>
@@ -7,16 +7,16 @@
 			<div class='row'>
 				<button (click)='openComposeBox()'>Compose</button>
 			</div>
-			<div class='row pointer' (click)='getPlaceholderMails("inbox")'>
+			<div class='row pointer' [ngClass]="{'dark':placeholderName=='inbox'}" (click)='getPlaceholderMails("inbox")'>
 				Inbox
 			</div>
-			<div class='row pointer' (click)='getPlaceholderMails("sent_mail")'>
+			<div class='row pointer' [ngClass]="{'dark':placeholderName=='sent_mail'}" (click)='getPlaceholderMails("sent_mail")'>
 				Sent Mails
 			</div>
-			<div class='row pointer' (click)='getPlaceholderMails("drafts")'>
+			<div class='row pointer' [ngClass]="{'dark':placeholderName=='drafts'}" (click)='getPlaceholderMails("drafts")'>
 				Drafts
 			</div>
-			<div class='row pointer' (click)='getPlaceholderMails("trash")'>
+			<div class='row pointer' [ngClass]="{'dark':placeholderName=='trash'}" (click)='getPlaceholderMails("trash")'>
 				Trash
 			</div>
 		</div>
