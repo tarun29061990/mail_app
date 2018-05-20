@@ -17,8 +17,8 @@ export class HomeService {
             this.AUTH_URL = '';
             this.API_URL = '';
         } else if (environment.envName === 'prod') {
-            this.AUTH_URL = '';
-            this.API_URL = '';
+            this.AUTH_URL = '//sample.backend.grexter.in/';
+            this.API_URL = '//sample.backend.grexter.in/';
         } else if (environment.envName === 'local') {
             this.AUTH_URL = '//localhost:4000';
             this.API_URL = '//localhost:4000';
