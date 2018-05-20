@@ -1166,8 +1166,8 @@ var HomeService = (function () {
             this.API_URL = '';
         }
         else if (__WEBPACK_IMPORTED_MODULE_1__environments_environment__["a" /* environment */].envName === 'prod') {
-            this.AUTH_URL = '//sample.backend.grexter.in/';
-            this.API_URL = '//sample.backend.grexter.in/';
+            this.AUTH_URL = '//sample.backend.grexter.in';
+            this.API_URL = '//sample.backend.grexter.in';
         }
         else if (__WEBPACK_IMPORTED_MODULE_1__environments_environment__["a" /* environment */].envName === 'local') {
             this.AUTH_URL = '//localhost:4000';
@@ -1289,8 +1289,8 @@ var LogInService = (function () {
             this.API_URL = '';
         }
         else if (__WEBPACK_IMPORTED_MODULE_1__environments_environment__["a" /* environment */].envName === 'prod') {
-            this.AUTH_URL = '//sample.backend.grexter.in/';
-            this.API_URL = '//sample.backend.grexter.in/';
+            this.AUTH_URL = 'http://sample.backend.grexter.in';
+            this.API_URL = 'http://sample.backend.grexter.in';
         }
         else if (__WEBPACK_IMPORTED_MODULE_1__environments_environment__["a" /* environment */].envName === 'local') {
             this.AUTH_URL = '//localhost:4000';
@@ -1409,4 +1409,4 @@ module.exports = __webpack_require__("../../../../../src/main.ts");
 /***/ })
 
 },[0]);
-//# sourceMappingURL=main.3667fe07d835479234a3.bundle.js.map
+//# sourceMappingURL=main.93f50caadb3eea626d62.bundle.js.map
