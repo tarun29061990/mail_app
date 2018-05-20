@@ -11,7 +11,7 @@ class MailService(DatabaseService):
         with Db.get() as self._db:
 
             sender = UserService().get_by_email(dict['sender_email'])
-
+            dict['creator_id'] = sender['id']
 
             #add message
             message_dict = MessageService().convert_to_message_dict(dict)
@@ -26,11 +26,17 @@ class MailService(DatabaseService):
             #add mapping of recipient with placeholder as Inbox
             to_emails = dict['recipient_email'].split(',')
             for email in to_emails:
-                recipient = UserService().get_by_email(email)
+                recipient = UserService().get_by_email(email.strip())
                 dict['user_id'] = recipient["id"]
                 MessageService().add_user_message_mapping( dict, 'inbox')
 
-            return message_dict
+            return message_object
+
+    def forward(self, dict):
+        with Db.get() as self._db:
+            message = self.compose(dict)
+            MessageService().update_message(dict['child_message_id'],{'parent_message_id':message.id})
+            return
 
     def delete(self, mapping_id):
         with Db.get() as self._db:
@@ -41,7 +47,7 @@ class MailService(DatabaseService):
     def save_to_drafts(self, dict):
         with Db.get() as self._db:
             sender = UserService().get_by_email(dict['sender_email'])
-
+            dict['creator_id'] = sender['id']
 
             #add message
             message_dict = MessageService().convert_to_message_dict(dict)

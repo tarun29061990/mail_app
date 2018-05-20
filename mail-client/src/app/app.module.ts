@@ -11,6 +11,9 @@ import { LogInModule }            from './login/login.module';
 import { HomeComponent }            from './home/home.component';
 import { HomeModule }            from './home/home.module';
 
+import { MailViewComponent }            from './mailView/mail-view.component';
+import { MailViewModule }            from './mailView/mail-view.module';
+
 import {ModalComponent} from './modal.component';
 
 @NgModule({
@@ -18,7 +21,8 @@ import {ModalComponent} from './modal.component';
     AppComponent,
     LogInComponent,
     HomeComponent,
-    ModalComponent
+    ModalComponent,
+    MailViewComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +30,8 @@ import {ModalComponent} from './modal.component';
     LogInModule,
     FormsModule,
     HttpModule,
-    HomeModule
+    HomeModule,
+    MailViewModule
   ],
   providers: [],
   bootstrap: [AppComponent]

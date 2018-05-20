@@ -1,4 +1,4 @@
-\<div class="container-fluid">
+<div class="container-fluid">
 	<div class='row'>
 		<div class='header'></div>
 	</div>
@@ -25,17 +25,8 @@
 				<div class='loader'></div>
 			</div>
 			<div class='mail-box' *ngIf='!showLoader'>
-				<div class='row mail-row' *ngFor='let mail of mails' (click)='openMailView(mail)'>
-					<div class='col-md-9'>
-						<b>{{mail.message.subject}}</b>&nbsp;&nbsp;<span>{{mail.message.body}}</span>
-					</div>
-					<div class='col-md-3'>
-						<p>
-							{{mail.message.date | date:'dd/MM/yyyy HH:MM'}} &nbsp; &nbsp;
-							<span class='trash' (click)='trashIt(mail)'><i class='fa fa-trash'></i></span>
-						</p>
-						
-					</div>
+				<div class='row mail-row' *ngIf='dataLoaded'>
+					{{message}}
 				</div>
 			</div>
 		</div>
@@ -66,38 +57,5 @@
 		<button type="button" class="btn btn-primary" (click)="saveToDrafts()">Save to drafts</button>
 		<button type="button" class="btn btn-default" (click)="hideComposeBox()">Close</button>
 		<button type="button" class="btn btn-primary" (click)="sendMail()">Send Mail</button>
-	</div>
-</app-modal>
-
-<app-modal #mailViewModel> 
-	<div class="app-modal-header">
-		
-	</div>
-	<div class="app-modal-body">
-		<div class="container-fluid">
-			<div class="row" *ngIf='message'>
-
-				<p ><b>{{message.subject}}</b></p>
-				<p>{{message.body}}</p>
-				<div *ngFor='let child of message.children'>
-					<p>{{child.body}}</p>
-				</div>
-			</div>
-			<div class='row' *ngIf='showReplyBox'>
-				<textarea [(ngModel)]='message.repliedMessage'></textarea>
-				<button (click)='sendReply(message)'>Reply</button>
-			</div>
-
-			<div class='row' *ngIf='showForwardBox'>
-				<input type='text' placeholder='Enter email' [(ngModel)]='message.forwardMail' /><br />
-				<textarea placeholder='Enter message' [(ngModel)]='message.forwardedMessage'></textarea>
-				<button (click)='forward(message)'>send</button>
-			</div>
-		</div>
-	</div>
-	<div class="app-modal-footer">
-		<button type="button" class="btn btn-primary" (click)="showForwardBox=true;">Forward</button>
-		<button type="button" class="btn btn-default" (click)="mailViewModel.hide()">Close</button>
-		<button type="button" class="btn btn-primary" (click)="showReplyBox = true;">Reply</button>
 	</div>
 </app-modal>

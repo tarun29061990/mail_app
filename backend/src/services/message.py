@@ -7,6 +7,11 @@ from common.database import Db
 from services.common import DatabaseService
 
 class MessageService(DatabaseService):
+    def get(self, message_id, include):
+        with Db.get() as self._db:
+            return Message.get(self._db, message_id, include)
+
+
     def add(self, dict):
         with Db.get() as self._db:
             dict["date"] = datetime.now()
@@ -18,7 +23,8 @@ class MessageService(DatabaseService):
     def convert_to_message_dict(self, dict):
          return {
              "body": dict["body"] if "body" in dict else '',
-             "subject": dict["subject"] if "subject" in dict else ''
+             "subject": dict["subject"] if "subject" in dict else '',
+             "creator_id":dict["creator_id"] if "creator_id" in dict else ''
          }
 
     def add_user_message_mapping(self, dict, placeholder_name):
@@ -60,3 +66,9 @@ class MessageService(DatabaseService):
                 user_dict['mp'] = mapping_arr
 
                 return user_dict
+
+    def update_message(self, child_id, dict):
+        with Db.get() as self._db:
+            Message.update(self._db, child_id, dict)
+            self._db.commit()
+            return dict

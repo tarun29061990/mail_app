@@ -21,10 +21,15 @@ export class HomeComponent implements OnInit{
 
 	public placeholderName:any;
 	public mails:any;
+	public message:any;
 
 	public showLoader:boolean;
+	public showReplyBox:boolean;
+	public showForwardBox:boolean;
+
 
 	@ViewChild('composeModel')composeModel: any;
+	@ViewChild('mailViewModel')mailViewModel: any;
 
 	constructor(private api: HomeService, private router: Router){}
 	
@@ -32,6 +37,8 @@ export class HomeComponent implements OnInit{
 		const that = this;
 		that.mails = [];
 		that.showLoader = false;
+		that.showReplyBox = false;
+		that.showForwardBox = false;
 
 		let user = JSON.parse(localStorage.getItem('current_user'));
 		that.senderEmail = user["email"];
@@ -104,5 +111,48 @@ export class HomeComponent implements OnInit{
 			that.showLoader = false;
 			that.getPlaceholderMails('inbox');
 		}, err=>{});
+	}
+
+	openMailView(mail){
+		const that = this;
+
+		that.showLoader = true;
+		that.api.getMessage(mail.message.id).subscribe(data=>{
+ 			that.message = data;
+ 			that.showLoader = false;
+ 			that.mailViewModel.show();
+ 		}, err=>{});
+	}
+
+	sendReply(message){
+		const that = this;
+		let messageDict = {
+			'subject':message.subject,
+			'body': message.repliedMessage,
+			'creator_id': that.senderId,
+			'parent_message_id': message.id
+		}
+		that.api.addMessage(messageDict).subscribe(data=>{
+			that.mailViewModel.hide();
+		}, err=>{});
+	}
+
+	forward(message){
+		const that = this;
+
+
+		let mail_dict = {
+			"body": message.forwardedMessage,
+			"subject": message.subject,
+			"recipient_email": message.forwardMail,
+			"sender_email":that.senderEmail,
+			"child_message_id": message.id
+		}
+
+		that.api.forwardMail(mail_dict).subscribe(data=>{
+			console.log('Mail sent');
+			that.getPlaceholderMails('inbox');
+			that.hideComposeBox();
+		}, err=>{})
 	}
 }

@@ -6,7 +6,7 @@ import { environment } from '../../environments/environment';
 import 'rxjs/add/operator/map';
 
 @Injectable()
-export class HomeService {
+export class MailViewService {
     AUTH_URL: any;
     API_URL: any;
     auth_token: string;
@@ -45,30 +45,8 @@ export class HomeService {
 
     }
 
-    sendMail(dict:any) : Observable<any> {
-        return this.sendRequest(RequestMethod.Post, '/compose',dict, false);
-    }
-    forwardMail(dict:any) : Observable<any> {
-        return this.sendRequest(RequestMethod.Post, '/forward',dict, false);
-    }
-
-    getPlaceholderMails(senderId, placeholderName): Observable<any> {
-        return this.sendRequest(RequestMethod.Get, '/users/'+senderId+'/'+placeholderName,null, false);
-    }
-
-    saveToDrafts(dict): Observable<any>{
-        return this.sendRequest(RequestMethod.Post, '/save-mail',dict, false);
-    }
-
-    trashIt(id): Observable<any>{
-        return this.sendRequest(RequestMethod.Delete, '/mail/'+id,null, false);
-    }
-
     getMessage(messageId): Observable<any>{
         return this.sendRequest(RequestMethod.Get, '/messages/'+messageId, null, false);
-    }
-    addMessage(messageDict): Observable<any>{
-        return this.sendRequest(RequestMethod.Post, '/messages', messageDict, false);
     }
     
 }

@@ -1,0 +1,9 @@
+#-*- coding:utf-8 -*-
+SQL_UP = u"""
+alter table messages add column creator_id int(10) unsigned default null, add foreign key fk_creator_id(`creator_id`) references users(`id`);
+"""
+
+SQL_DOWN = u"""
+alter table messages drop foreign key fk_creator_id;
+alter table messaged drop column creator_id;
+"""

@@ -9,6 +9,12 @@ def compose_mail():
     dict = request.get_json(force=True)
     return json_response(MailService().compose(dict))
 
+@flask.route('/forward', methods=['POST'])
+@controller.api_controller()
+def forward_mail():
+    dict = request.get_json(force=True)
+    return json_response(MailService().forward(dict))
+
 @flask.route('/mail/<mapping_id>', methods=['DELETE'])
 @controller.api_controller()
 def delete_mail(mapping_id):

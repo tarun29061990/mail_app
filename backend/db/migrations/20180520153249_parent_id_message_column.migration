@@ -1,0 +1,9 @@
+#-*- coding:utf-8 -*-
+SQL_UP = u"""
+alter table messages add column parent_message_id int(10) unsigned default null, add foreign key fk_parent_message_id(`parent_message_id`) references messages(`id`);
+"""
+
+SQL_DOWN = u"""
+alter table messages drop foreign key fk_parent_message_id;
+alter table messages drop column parent_message_id;
+"""
