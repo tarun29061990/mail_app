@@ -3,7 +3,7 @@ from flask import request
 from util.json import json_response
 from services.mail import MailService
 
-@flask.route('/mail', methods=['POST'])
+@flask.route('/compose', methods=['POST'])
 @controller.api_controller()
 def compose_mail():
     dict = request.get_json(force=True)
@@ -14,7 +14,8 @@ def compose_mail():
 def delete_mail(mapping_id):
     return json_response(MailService().delete(mapping_id))
 
-@flask.route('/mail/<mapping_id>', methods=['PUT'])
+@flask.route('/save-mail', methods=['POST'])
 @controller.api_controller()
-def save_to_drafts(mapping_id):
-    return json_response(MailService().save_to_drafts(mapping_id))
+def save_to_drafts():
+    dict = request.get_json(force=True)
+    return json_response(MailService().save_to_drafts(dict))

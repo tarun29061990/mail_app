@@ -1,5 +1,6 @@
 from datetime import datetime
 from model.message import Message
+from model.user import User
 from model.user_message_mapping import UserMessageMapping
 from model.placeholder import Placeholder
 from common.database import Db
@@ -38,3 +39,24 @@ class MessageService(DatabaseService):
             UserMessageMapping.update(self._db, mapping_id, dict)
             self._db.commit()
             return dict
+
+    def get_user_message_mapping(self, user_id, placeholder_name=None):
+        with Db.get() as self._db:
+            placeholder = Placeholder.get_by_name(self._db, placeholder_name)
+            user = User.get(self._db, user_id)
+
+            if len(user):
+                user_dict = user[0].to_json_dict()
+                user_message_mappings = UserMessageMapping.get_mapping(self._db, user_id)
+
+                mapping_arr = []
+                for umm in user_message_mappings:
+                    if umm.placeholder_id == placeholder.id:
+                        message = Message.get(self._db, umm.message_id)
+                        umm_dict = umm.to_json_dict()
+                        umm_dict["message"] = message.to_json_dict()
+                        mapping_arr.append(umm_dict)
+
+                user_dict['mp'] = mapping_arr
+
+                return user_dict

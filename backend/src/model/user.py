@@ -16,25 +16,39 @@ class User(ModelBase):
     created_at = Column(DateTime, nullable=False, default=datetime.datetime.now())
     updated_at = Column(DateTime, nullable=False, default=datetime.datetime.now())
 
-    def to_dict(self):
+    messages = relationship('Message', lazy="subquery", secondary='users_messages_mapping')
+
+    def to_dict(self, include):
         obj_dict = super(self.__class__,self).to_dict()
 
         if self.name:
             obj_dict["name"] = self.name
         if self.email:
             obj_dict["email"] = self.email
-        if self.password:
-            obj_dict["password"] = self.password
         if self.id:
             obj_dict["id"] = self.id
         if self.created_at:
             obj_dict["created_at"] = self.created_at
         if self.updated_at:
             obj_dict["updated_at"] = self.updated_at
+
+        obj_dict["is_authenticated"] = self.is_authenticated
+
+        obj_dict["is_active"] = self.is_active
+
+        obj_dict["is_anonymous"] = self.is_anonymous
+        if include is not None and "password" in include:
+            if self.password:
+                obj_dict["password"] = self.password
+
+        if include is not None and "messages" in include:
+            if self.messages:
+                obj_dict["messages"] = self.messages
+
         return obj_dict
 
     def to_json_dict(self, include=None):
-        obj_dict = self.to_dict()
+        obj_dict = self.to_dict(include)
         return obj_dict
 
     def from_dict(self, obj_dict):
@@ -62,6 +76,9 @@ class User(ModelBase):
         db.add(user_dict)
         return user_dict
 
+    def get_id(self):
+        return UserMixin.get_id(self)
+
     @classmethod
     def get(cls,db,id):
         query = db.query(cls)
@@ -75,4 +92,11 @@ class User(ModelBase):
     @classmethod
     def delete(cls,db,id):
         query = db.query(cls)
-        return query.filter(cls.id == id).delete()
+        return query.filter(cls.id == id).delete()\
+
+    @classmethod
+    def join_tables(cls, query, include):
+        if not include: return query
+        if "messages" in include:
+            query = query.options(joinedload(cls.messages))
+        return query

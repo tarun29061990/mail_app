@@ -21,8 +21,8 @@ class UserMessageMapping(ModelBase):
             obj_dict["message_id"] = self.message_id
         if self.placeholder_id:
             obj_dict["placeholder_id"] = self.placeholder_id
-        if self.is_read:
-            obj_dict["is_read"] = self.is_read
+
+        obj_dict["is_read"] = self.is_read
         if self.id:
             obj_dict["id"] = self.id
         if self.created_at:
@@ -42,8 +42,8 @@ class UserMessageMapping(ModelBase):
             self.message_id = obj_dict["message_id"]
         if "placeholder_id" in obj_dict:
             self.placeholder_id = obj_dict["placeholder_id"]
-        if "id" in obj_dict:
-            self.id = obj_dict["id"]
+        if "is_read" in obj_dict:
+            self.is_read = obj_dict["is_read"]
         if "created_at" in obj_dict:
             self.created_at = obj_dict["created_at"]
         if "updated_at" in obj_dict:
@@ -66,3 +66,8 @@ class UserMessageMapping(ModelBase):
     def update(cls, db, mapping_id, dict):
         query = db.query(cls)
         return query.filter(cls.id == mapping_id).update(dict)
+
+    @classmethod
+    def get_mapping(cls, db, user_id):
+        query = db.query(cls)
+        return query.filter(cls.user_id == user_id).all()
