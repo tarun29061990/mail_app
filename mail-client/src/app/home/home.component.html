@@ -25,7 +25,7 @@
 				<div class='loader'></div>
 			</div>
 			<div class='mail-box' *ngIf='!showLoader'>
-				<div class='row mail-row' *ngFor='let mail of mails' (click)='openMailView(mail)'>
+				<div class='row mail-row' *ngFor='let mail of mails' (click)='openMailView(mail)' [ngClass]="{'read':mail.is_read !==0}">
 					<div class='col-md-9'>
 						<b>{{mail.message.subject}}</b>&nbsp;&nbsp;<span>{{mail.message.body}}</span>
 					</div>

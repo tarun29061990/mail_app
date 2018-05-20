@@ -121,6 +121,9 @@ export class HomeComponent implements OnInit{
  			that.message = data;
  			that.showLoader = false;
  			that.mailViewModel.show();
+ 			that.api.updateMessageMapping(mail.id, {'is_read':1}).subscribe(data=>{
+				that.mails[that.mails.indexOf(mail)].is_read = 1;
+ 			}, err=>{});
  		}, err=>{});
 	}
 

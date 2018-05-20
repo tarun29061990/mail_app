@@ -70,5 +70,8 @@ export class HomeService {
     addMessage(messageDict): Observable<any>{
         return this.sendRequest(RequestMethod.Post, '/messages', messageDict, false);
     }
+    updateMessageMapping(messageId, dict):Observable<any>{
+        return this.sendRequest(RequestMethod.Put, '/messages/'+messageId, dict, false);
+    }
     
 }
