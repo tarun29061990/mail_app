@@ -1,0 +1,70 @@
+<div class="container-fluid">
+	<div class='row'>
+		<div class='header'></div>
+	</div>
+	<div class='row'>
+		<div class="col-md-1 left-bar">
+			<div class='row'>
+				<button (click)='openComposeBox()'>Compose</button>
+			</div>
+			<div class='row pointer' (click)='getPlaceholderMails("inbox")'>
+				Inbox
+			</div>
+			<div class='row pointer' (click)='getPlaceholderMails("sent_mail")'>
+				Sent Mails
+			</div>
+			<div class='row pointer' (click)='getPlaceholderMails("drafts")'>
+				Drafts
+			</div>
+			<div class='row pointer' (click)='getPlaceholderMails("trash")'>
+				Trash
+			</div>
+		</div>
+		<div class='col-md-11'>
+			<div class='overlay' *ngIf='showLoader'>
+				<div class='loader'></div>
+			</div>
+			<div class='mail-box' *ngIf='!showLoader'>
+				<div class='row mail-row' *ngFor='let mail of mails'>
+					<div class='col-md-9'>
+						<b>{{mail.message.subject}}</b>&nbsp;&nbsp;<span>{{mail.message.body}}</span>
+					</div>
+					<div class='col-md-3'>
+						<p>
+							{{mail.message.date | date:'dd/MM/yyyy HH:MM'}} &nbsp; &nbsp;
+							<span class='trash' (click)='trashIt(mail)'><i class='fa fa-trash'></i></span>
+						</p>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<app-modal #composeModel> 
+	<div class="app-modal-header">
+		Compose Mail
+	</div>
+	<div class="app-modal-body">
+		<div class="container-fluid">
+			<div class="row">
+
+				<div class="form-group col-md-12">
+				  <input class="col-md-9 form-input" name="toEmail" [(ngModel)]="toEmail" type="text" placeholder="to email" />
+				</div>
+				<div class="form-group col-md-12">
+				  <input class="col-md-9 form-input" name="subject" [(ngModel)]="subject" type="text" placeholder="subject" />
+				</div>
+				<div class="form-group col-md-12">
+				  <textarea class="col-md-9 form-input" name="body" [(ngModel)]="body"  placeholder="body"></textarea>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="app-modal-footer">
+		<button type="button" class="btn btn-primary" (click)="saveToDrafts()">Save to drafts</button>
+		<button type="button" class="btn btn-default" (click)="hideComposeBox()">Close</button>
+		<button type="button" class="btn btn-primary" (click)="sendMail()">Send Mail</button>
+	</div>
+</app-modal>
