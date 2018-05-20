@@ -2,23 +2,26 @@
 
 This is a sample messaging app coded in python as a backend and angular4 as a frontend.
 
-##Frontend:-
+## Frontend:-
+
 Make sure you have angular cli installed
 go to mail-client folder and run npm install
 then run ng serve
 
-##Backend:-
+## Backend:-
+
 - Make sure you have python3.5 installed
 - Run python src/main.py
 - Db migrations are there in db folder.
 
 Go to localhost:4200 and see the magic
-#####Add some sample users with add user API 
+
+##### Add some sample users with add user API 
 URL    /users \
 Method POST \  
 BODY {'name':'','email':'','password':''}
 
-##Functionality
+## Functionality
 
 - Send mail to multiple users by providing their mail ids as a CSV (comma seperated values).
 - Send, save and delete mails and they will appear in the placeholders accordingly.
