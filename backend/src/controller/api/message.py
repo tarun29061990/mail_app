@@ -14,3 +14,9 @@ def add_message():
 def get_message(id):
     include = ['user','parent','children']
     return json_response(MessageService().get(id, include),include)
+
+@flask.route('/messages/<int:id>', methods=['PUT'])
+@controller.api_controller()
+def update_message(id):
+    dict = request.get_json(force=True)
+    return json_response(MessageService().update_user_message_mapping(id, dict))

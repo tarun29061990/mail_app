@@ -67,8 +67,8 @@ class MessageService(DatabaseService):
 
                 return user_dict
 
-    def update_message(self, child_id, dict):
+    def update_message(self, id, dict):
         with Db.get() as self._db:
-            Message.update(self._db, child_id, dict)
+            Message.update(self._db, id, dict)
             self._db.commit()
             return dict
