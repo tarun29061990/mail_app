@@ -12,3 +12,8 @@ class UserService(DatabaseService):
             self._db.commit()
             self._db.refresh(user)
             return user
+
+    def get_by_email(self, email):
+        with Db.get() as self._db:
+            user = User.get_by_email(self._db, email)
+            return user.to_json_dict()
